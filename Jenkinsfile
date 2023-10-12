@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'docker build -t kurniawanfarid1215/baruu:2 .'
+                sh 'mvn clean install'
             }
         }
         // ...Tambahkan tahapan lain seperti pengujian, implementasi, dll.
