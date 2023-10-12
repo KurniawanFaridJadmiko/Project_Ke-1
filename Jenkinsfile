@@ -7,7 +7,7 @@ pipeline {
 
         stage('Build docker image') {
             steps {  
-                sh 'docker build -t KurniawanFaridJadmiko/tugas1:$BUILD_NUMBER .'
+                sh 'docker build -t kurniawanfarid1215/tugas1:$BUILD_NUMBER .'
             }
         }
         stage('login to dockerhub') {
@@ -17,7 +17,7 @@ pipeline {
         }
         stage('push image') {
             steps{
-                sh 'docker push KurniawanFaridJadmiko/tugas1:$BUILD_NUMBER'
+                sh 'docker push kurniawanfarid1215/tugas1:$BUILD_NUMBER'
             }
         }
 }
