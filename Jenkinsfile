@@ -1,16 +1,29 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3.8.4'
-            args '-v /var/run/docker.sock:/var/run/docker.sock'
-        }
+    agent any 
+    environment {
+    DOCKERHUB_CREDENTIALS = credentials('kurniawanfarid1215-dockerhub')
     }
-    stages {
-        stage('Build') {
-            steps {
-                sh 'mvn clean install'
+    stages { 
+
+        stage('Build docker image') {
+            steps {  
+                sh 'docker build -t KurniawanFaridJadmiko/tugas1:$BUILD_NUMBER .'
             }
         }
-        // ...Tambahkan tahapan lain seperti pengujian, implementasi, dll.
+        stage('login to dockerhub') {
+            steps{
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+            }
+        }
+        stage('push image') {
+            steps{
+                sh 'docker push KurniawanFaridJadmiko/tugas1:$BUILD_NUMBER'
+            }
+        }
+}
+post {
+        always {
+            sh 'docker logout'
+        }
     }
 }
