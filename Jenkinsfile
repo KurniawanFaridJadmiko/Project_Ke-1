@@ -7,10 +7,6 @@ pipeline {
 
         stage('Build docker image') {
             steps { 
-                def isValidTag = (env.BUILD_NUMBER =~ /^[a-zA-Z0-9_.-]{1,127}$/).matches()
-                if (!isValidTag) {
-                    error "BUILD_NUMBER contains invalid characters."
-                }
                 sh 'docker build -t kurniawanfarid1215/tugas1:$BUILD_NUMBER .'
             }
         }
