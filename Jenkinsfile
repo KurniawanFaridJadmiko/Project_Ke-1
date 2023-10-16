@@ -22,7 +22,7 @@ pipeline {
         }
         stage('Run') {
             steps{
-                sh 'docker run -p 3000:3000 -d kurniawanfarid1215/tugas1:$BUILD_NUMBER'
+                sh 'docker run --restart always -p 3000:3000 -d kurniawanfarid1215/tugas1:$BUILD_NUMBER'
             }
         }
 }
