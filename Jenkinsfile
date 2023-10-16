@@ -1,7 +1,7 @@
 pipeline {
     agent any 
     environment {
-    DOCKERHUB_CREDENTIALS = credentials('kurniawanfarid1215-dockerhub')
+        DOCKERHUB_CREDENTIALS = credentials('kurniawanfarid1215-dockerhub')
     }
     stages { 
 
@@ -20,10 +20,22 @@ pipeline {
                 sh 'docker push kurniawanfarid1215/tugas1:$BUILD_NUMBER'
             }
         }
-}
-post {
+
+        stage('Run Docker Container') {
+            steps {
+                script {
+                    dockerContainer = docker.image('kurniawanfarid1215/tugas1:$BUILD_NUMBER').run('-p 8080:80 -d')
+                }
+            }
+        }
+    }
+
+    post {
         always {
-            sh 'docker logout'
+            script {
+                dockerContainer.stop()
+                dockerContainer.remove()
+            }
         }
     }
 }
