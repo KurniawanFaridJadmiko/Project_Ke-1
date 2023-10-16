@@ -4,7 +4,7 @@ pipeline {
     DOCKERHUB_CREDENTIALS = credentials('kurniawanfarid1215-dockerhub')
     }
     stages { 
-
+        
         stage('Build docker image') {
             steps { 
                 sh 'docker build -t kurniawanfarid1215/tugas1:$BUILD_NUMBER .'
