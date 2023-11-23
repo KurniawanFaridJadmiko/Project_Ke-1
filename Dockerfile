@@ -1,5 +1,5 @@
 # Gunakan node:alpine sebagai base image
-FROM node:alpine
+FROM node:18
 
 # Set direktori kerja di dalam kontainer
 WORKDIR /app
