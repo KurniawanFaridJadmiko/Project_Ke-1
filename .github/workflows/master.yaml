@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      
+
 jobs:
   buildpush:
     runs-on: ubuntu-latest
@@ -26,11 +26,3 @@ jobs:
 
       - name: Push
         run: docker push ghcr.io/kurniawanfaridjadmiko/tugas1:${{ github.run_number }}
-
-  pull:
-    needs: buildpush
-    runs-on: self-hosted
-
-    steps:
-      - name: Pull
-        run: docker pull ghcr.io/kurniawanfaridjadmiko/tugas1:${{ github.run_number }}
